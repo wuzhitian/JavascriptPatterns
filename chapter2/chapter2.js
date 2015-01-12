@@ -1,5 +1,46 @@
+//P15 全局变量问题
+// ********************************************************//
+// function aa (){
+// 	var a = b = 0;
+// }
+// aa();
+// console.log(b);    	// 0;   这缘于从右至左的操作付优先级。首先优先级较高的是表达式b=0，此时b未经声明，这等同于 var a = (b = 0);
+// console.log(a);		// a is not defined;
+
+// function dd (){
+// 	var c, d;
+// 	c = d = 0;
+// }
+// dd();
+// console.log(c);		// c is not defined;
+// console.log(d);		// d is not defined;
+// ********************************************************//
+// 
+// P16 变量释放是的副作用
+// ********************************************************//
+// 1. 使用var创建的全局变量不能删除;
+// 2. 不使用var创建的隐含全局变量可以删除;
+// 这表明隐含全局变量严格来讲不是真正的变量，而是全局对象的属性。属性可以通过delete操作符删除，但变量不可以;
+// var global_var = 1;
+// global_novar = 2;
+// (function(){
+// 	global_fromfunc = 3;
+// })();
+// console.log(delete global_var);			//false;
+// console.log(delete global_novar);		//true;
+// console.log(delete global_fromfunc);	//true;
+
+// console.log(typeof global_var);			//number;
+// console.log(typeof global_novar);		//undefined;
+// console.log(typeof global_fromfunc);	//undefined;
+
+
+// ********************************************************//
+
+
 // P17
 // ********************************************************//
+// Javascript 允许在函数的任意位置声明多个变量，在相同的作用域内，无论在哪里声明，效果都等同于在函数的顶部进行声明，哪怕在变量声明前就使用;
 // myname = "global";
 // (function(){
 //  console.log(myname);    //undefined
@@ -14,6 +55,7 @@
 //  myname = "local";
 //  console.log(myname);    //local
 // })();
+// console.log(myname);
 // 
 // ********************************************************//
 
@@ -40,8 +82,7 @@
 
 // var c = 0;
 // console.time("time3")
-// var i;
-// for(i = arrayTest.length; i > 0; i--){
+// for(var i = arrayTest.length; i > 0; i--){
 //  c = c + i;
 // }
 // console.timeEnd("time3");
