@@ -137,7 +137,8 @@
 // 	};
 // };
 // var i, hasOwn = Object.prototype.hasOwnProperty;
-// for(i in man) if(hasOwn.call(man, i)){
+// for(i in man){
+// 	if(hasOwn.call(man, i))
 // 	console.log(i, ":", man[i]);
 // };
 
