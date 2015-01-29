@@ -31,9 +31,37 @@
 // }
 
 // curry("s","a","d");
-var a = function(){
-     console.log(this);    // 'littledu'
-     console.log(typeof this);      //  Object
-     console.log(this instanceof String);    // true
+// var a = function(){
+//      console.log(this);    // 'littledu'
+//      console.log(typeof this);      //  Object
+//      console.log(this instanceof String);    // true
+// }
+// a.call(123);
+
+
+
+//关于给构造函数定义了prototype后的变化
+function AAA(){
+	var name = "AAANAME";
+	this.getName = function(){
+		console.log(name);
+	}
 }
-a.call(123);
+var aaa0 = new AAA();
+
+AAA.prototype = (function(){
+	var val = "YYYYYYYYY";
+	return {
+		getVal: function(){
+			console.log(val);
+		}
+	}
+})();
+var aaa1 = new AAA();
+aaa1.getName();								//AAANAME
+aaa0.getName();								//AAANAME
+aaa1.getVal();								//YYYYYYYYY
+// aaa0.getVal();							//Error: Object #<AAA> has no method 'getVal'
+console.log(aaa1.constructor);				//[Function: Object]
+console.log(aaa0.constructor === AAA);		//true
+console.log(aaa1.constructor === AAA);		//false

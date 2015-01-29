@@ -220,7 +220,69 @@
 // 
 // ********************************************************//
 // 
-// P84 函数Curry化
+// P81 函数应用
 // ********************************************************//
+// var sayHi = function(who){
+// 	console.log("sayHi",who?who: "defaultName");
+// };
+// sayHi();								//sayHi defaultName
+// sayHi.apply(null,["Jaaa"]);				//sayHi Jaaa
+// sayHi.call(null,"Jean");				//sayHi Jean
+// var alien = {
+// 	name: "alien",
+// 	sayHi: function(who){
+// 		console.log("alien", who?who:"alienDefault");
+// 	}
+// };
+// var tom = {
+// 	name: 'tom',
+// 	sayHello: function(who){
+// 		console.log('tom', who?who:'tomDefault');
+// 	},
+// 	sayName: function(){
+// 		console.log(this.name);
+// 	}
+// };
+// alien.sayHi("KEN");						//alien KEN
+// alien.sayHi.apply(null, ["jjjjj"]);		//alien jjjjj
+// sayHi.apply(alien, ["BBB"]);			//sayHi BBB
+// tom.sayName();							//tom
+// tom.sayName.apply(alien);				//alien;
+// ********************************************************//
+// 
+// P84 Curry化
+// ********************************************************//
+// curry化的add()函数
+// 接受部分参数列表
+// function add(x, y){
+// 	if(typeof y === "undefined"){	//部分
+// 		return function(y){
+// 			return x + y;
+// 		}
+// 	}
+// 	return x + y;
+// }
+// console.log(add(3)(5));		//8
+// console.log(add(4, 6));		//10
 
+
+// function schonfinkelize(fn){
+// 	var slice = Array.prototype.slice;
+// 	//Array.prototype.slice可以将具有length属性的变量转成数组
+// 	var stored_args = slice.call(arguments, 1);		//截取与fn一同传进来的参数
+// 	console.log(stored_args);
+// 	return function (){
+// 		var new_args = slice.call(arguments);
+// 		var args = stored_args.concat(new_args);
+// 		return fn.apply(null, args);
+// 	}
+// }
+// function add(x, y, z, h){
+// 	return x + y + z + h;
+// }
+// var new_add = schonfinkelize(add, 6,7,8);
+// console.log(new_add(9));	//30;
+// ********************************************************//
+//
+//
 // ********************************************************//
