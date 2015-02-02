@@ -281,7 +281,137 @@
 // }
 // ********************************************************//
 // 
+// P108  公有静态成员
+// ********************************************************//
+// 	//构造函数
+// var Gadget = function(){};
+// 	//静态方法
+// Gadget.isShiny = function(){
+// 	console.log("you bet");
+// }
+// 	//向该原型添加一个普通方法
+// Gadget.prototype.setPrice = function(price){
+// 	this.price = price;
+// }
+// Gadget.prototype.getPrice = function(){
+// 	console.log(this.price);
+// }
+// 	//调用静态方法
+// Gadget.isShiny();	//"you bet"
+// 	//创建一个实例并调用其方法
+// var iphone = new Gadget();
+// iphone.setPrice(500);
+// iphone.getPrice();							//500
+// // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// console.log(typeof Gadget.setPrice);			//"undefined"
+// console.log(typeof iphone.isShiny);			//"undefined"
+// *********************//
+
+
+// 	//构造函数
+// var Gadget = function(price){
+// 	this.price = price;
+// }
+// 	//静态方法
+// Gadget.isShiny = function(){
+// 	//这种方法总是可以运行
+// 	var msg = "you bet";
+// 	if(this instanceof Gadget){
+// 		//this only works if called non-statically
+// 		msg += " cost "+this.price;
+// 	}
+// 	console.log(msg);
+// }
+// //向该原型添加一个普通方法
+// Gadget.prototype.isShiny = function(){
+// 	return Gadget.isShiny.call(this);
+// }
+// //测试静态方法调用
+// Gadget.isShiny();				//"you bet"
+// //测试实例，非静态调用:
+// var a = new Gadget(300);
+// a.isShiny();					//"you bet cost 300"
+// ********************************************************//
 // 
+// P110	私有静态成员
 // ********************************************************//
+// var Gadget = (function(){
+// 	var i = 0;	//闭包变量
+// 	return function(){
+// 		console.log(i++);
+// 	}
+// }());
+// var a = new Gadget();	//0
+// var b = new Gadget();	//1
+// var c = new Gadget();	//2
+// *********************//
+
+////构造函数
+// var Gadget = (function(){
+// 	//静态变量/属性
+// 	var counter = 0;
+// 	var NewGadget;
+// 	//这将成为新的构造函数的实现
+// 	NewGadget = function(){
+// 		counter++;
+// 	};
+// 	//特权方法
+// 	NewGadget.prototype.getLastId = function(){
+// 		console.log(counter);
+// 	};
+// 	//覆盖该构造函数
+// 	return NewGadget;
+// }());	//立即执行
+// var iphone = new Gadget();
+// iphone.getLastId();			//1
+// var ipod = new Gadget();	
+// iphone.getLastId();			//2
+// var ipad = new Gadget();
+// ipad.getLastId();			//3
 // ********************************************************//
+// 
+// P112 对象常量
+// ********************************************************//
+// var constant = (function(){
+// 	var constants = {};
+// 	var ownProp = Object.prototype.hasOwnProperty;
+// 	var allowd = {
+// 		string: 1,
+// 		number: 1,
+// 		boolean: 1
+// 	};
+// 	var prefix = (Math.random()+"_").slice(2);	//String.prototype.slice() 方法可提取字符串的某个部分，并以新的字符串返回被提取的部分
+// 	return {
+// 		set: function(name, value){
+// 			if(this.isDefined(name)){
+// 				return false;
+// 			}
+// 			if(!ownProp.call(allowd, typeof value)){
+// 				return false;
+// 			}
+// 			constants[prefix + name] = value;
+// 			return true;
+// 		},
+// 		isDefined: function(name){
+// 			return ownProp.call(constants, prefix + name);
+// 		},
+// 		get: function(name){
+// 			if(this.isDefined(name)){
+// 				return constants[prefix + name];
+// 			}
+// 			return null;
+// 		}
+// 	};
+// }());
+// console.log(constant.isDefined("width"));			//false
+// console.log(constant.set("width", 400));			//true
+// console.log(constant.isDefined("width"));			//true
+// console.log(constant.set("width", 420));			//false
+// console.log(constant.get("width"));					//400
+// *********************//
+
+
+
+// ********************************************************//
+
 

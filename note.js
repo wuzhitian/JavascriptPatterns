@@ -108,3 +108,19 @@
 // 	console.log("KKKKKK")
 // }
 // ********************************************************//
+
+
+function Constant(){
+	this._prefix = (Math.random()+"_").slice(2);
+	var allowed = {
+		string: 1,
+		number: 1,
+		boolean: 1
+	};
+}
+Constant.prototype.setValue = function(name, value){
+	if()
+}
+Constant.prototype.isDefined = function(name){
+
+}
