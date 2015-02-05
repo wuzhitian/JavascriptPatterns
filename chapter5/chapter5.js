@@ -373,7 +373,7 @@
 // P112 对象常量
 // ********************************************************//
 // var constant = (function(){
-// 	var constants = {};
+// 	var constants = {};		//闭包内的局部变量
 // 	var ownProp = Object.prototype.hasOwnProperty;
 // 	var allowd = {
 // 		string: 1,
@@ -413,5 +413,62 @@
 
 
 // ********************************************************//
+// 
+// P113 链模式
+// ********************************************************//
+// function Person(name, age, sex){
+// 	this.name = name;
+// 	this.age = age;
+// 	this.sex = sex;
+// }
+// Person.prototype.sayName = function(){
+// 	console.log(this.name);
+// 	return this;
+// }
+// Person.prototype.sayAge = function(){
+// 	console.log(this.age);
+// 	return this;
+// }
+// Person.prototype.saySex = function(){
+// 	console.log(this.sex);
+// 	return this;
+// }
+// Person.prototype.older = function(value){
+// 	console.log(++this.age);
+// 	return this;
+// }
+
+// var Jean = new Person("Jean", 12, "female");
+// Jean.sayName()		//Jean
+// 	.sayAge()		//12
+// 	.saySex()		//female
+// 	.older();		//13
+// ********************************************************//
+// 
+// P115 method()方法
+// ********************************************************//
+// function Gadget(color, area){
+// 	this.color = color;
+// 	this.area = area;
+// }
+// Gadget.prototype.method = function(name, fn){
+// 	if(typeof this.constructor.prototype[name] == 'undefined'){
+// 		this.constructor.prototype[name] = fn;
+// 	}
+// 	return this;
+// }
+
+// var AAA = new Gadget("green", 40);
+// AAA.method("getColor", function(){
+// 	console.log(this.color);
+// 	return this;
+// }).method("getArea", function(){
+// 	console.log(this.area);
+// 	return this;
+// });
+// AAA.getColor()		//green
+// 	.getArea();		//40
+// ********************************************************//
+console.log(2121);
 
 

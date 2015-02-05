@@ -122,5 +122,5 @@ Constant.prototype.setValue = function(name, value){
 	if()
 }
 Constant.prototype.isDefined = function(name){
-
+	if(this[])
 }
