@@ -31,9 +31,10 @@
 // }
 
 // curry("s","a","d");
-var a = function(){
-     console.log(this);    // 'littledu'
-     console.log(typeof this);      //  Object
-     console.log(this instanceof String);    // true
-}
-a.call(123);
+// var a = function(){
+//      console.log(this);    // 'littledu'
+//      console.log(typeof this);      //  Object
+//      console.log(this instanceof String);    // true
+// }
+// a.call(123);
+
